@@ -114,3 +114,11 @@ The next session we will be utilising Snowpark to create a streamlit application
 * Go back to the home page and select the following option:
 ![Alt text](image-15.png)
 
+Find the downloaded file and run all the queries - this will create a new database with a schema and will create views of the datasets we were using previously into the new database.
+
+Replace <<FIRSTNAME_LASTNAME>> with your firstname and last name IE it should say NSS_DATA_ANALYSIS_BECKY_OCONNOR
+
+Repeat the replacement in the second query
+
+Ctrl + shift + enter or ![Alt text](image-16.png)  will run all queries in the page
+
