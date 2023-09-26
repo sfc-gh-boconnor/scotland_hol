@@ -105,3 +105,7 @@ All the weather measures are averages.
 * The final queries take you through simple steps to view tables, then join them together.  Run these individually as you wish.
 
 
+#### Prepare for Streamlit
+
+The next session we will be utilising Snowpark to create a streamlit application inside a database which you will create.
+
