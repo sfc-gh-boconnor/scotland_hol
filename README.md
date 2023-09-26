@@ -5,3 +5,10 @@ The following Hands on Lab will take you though collecting data from a data shar
 
 
 ### Login with your given username and password
+
+
+*   Click on the Data Icon - you will see a sample database called SNOWFLAKE_SAMPLE_DATA.  For this lab, we will be using a data from a data share
+
+![Alt text](image.png)
+
+* Click on Private Sharing
