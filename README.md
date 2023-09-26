@@ -114,11 +114,50 @@ The next session we will be utilising Snowpark to create a streamlit application
 * Go back to the home page and select the following option:
 ![Alt text](image-15.png)
 
-Find the downloaded file and run all the queries - this will create a new database with a schema and will create views of the datasets we were using previously into the new database.
+* Find the downloaded file and run all the queries - this will create a new database with a schema and will create views of the datasets we were using previously into the new database.
 
-Replace <<FIRSTNAME_LASTNAME>> with your firstname and last name IE it should say NSS_DATA_ANALYSIS_BECKY_OCONNOR
+* Replace <<FIRSTNAME_LASTNAME>> with your firstname and last name IE it should say NSS_DATA_ANALYSIS_BECKY_OCONNOR
 
-Repeat the replacement in the second query
+* Repeat the replacement in the second query
 
-Ctrl + shift + enter or ![Alt text](image-16.png)  will run all queries in the page
+* Ctrl + shift + enter or ![Alt text](image-16.png)  will run all queries in the page
 
+* Refresh the Databases explorer to see the new database
+
+![Alt text](image-17.png)
+
+* In curated, you will see 5 new views.  These are the required views for the streamlit app.
+
+* Go back to the home page and click on the button Streamlit
+
+* Press ![Alt text](image-18.png) to create a new Streamlit Application
+
+* Deploy the app in the following location
+
+![Alt text](image-19.png)
+
+Then press **Create**
+
+Here you can create an application using Snowpark dataframes and the Streamlit application framework.  You will see an example application.
+
+Lets create our first application 
+
+
+* Remove the sample code and copy and paste the following code  into the canvas
+
+```python
+# Import python packages
+import streamlit as st
+from snowflake.snowpark.context import get_active_session
+
+# Write directly to the app
+st.title("My First Application")
+
+# Get the current credentials
+session = get_active_session()
+
+deprivation = session.table('IMD_2020').drop('GEOGRAPHY')
+
+
+st.dataframe(deprivation,use_container_width=True)
+```
