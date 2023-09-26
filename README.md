@@ -180,7 +180,6 @@ import streamlit as st
 from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark import functions as F
 from snowflake.snowpark import types as T
-import plotly.graph_objects as go
 import pandas as pd
 import altair as alt
 import numpy as np
