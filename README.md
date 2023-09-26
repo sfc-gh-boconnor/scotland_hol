@@ -172,7 +172,10 @@ Now we will add a more sophisticated app.
 
 
 * Highlight the code created and delete it
-* Copy the following code into the canvas and then run it
+* Copy the following code into the canvas 
+
+* In packages, add the package pydeck 
+* Run the app
 
 ```python
 # Import python packages
