@@ -11,4 +11,11 @@ The following Hands on Lab will take you though collecting data from a data shar
 
 ![Alt text](image.png)
 
-* Click on Private Sharing
+* Click on Private Sharing.  You should see one Privately Shared Listing
+
+![Alt text](image-1.png)
+
+* Click on the Listing to view more details about the dataset.  You will see some information about the data  via the data dictionary.  I have featured 4 of the datasets but you do have the option to view all 11 objects.
+
+You will also see useage examples with sample sql queries
+
