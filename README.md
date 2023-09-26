@@ -25,3 +25,10 @@ You will also see useage examples with sample sql queries.  When you press open,
 
 ![Alt text](image-3.png)
 
+Opening up the Raw Schema of the NSS_HANDS_ON_LAB_DATASETS database will reveal all the tables within the explorer area
+
+![Alt text](image-4.png)
+
+Highlight IMD_2020 to reveal information about the table - which also includes a dictionary which explains what some of the fields mean.
+
+![Alt text](image-5.png)
