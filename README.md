@@ -41,3 +41,8 @@ Position your mouse cursor anywhere inside the first sample query.  TIP - you do
 
 Above is a screenshot of the first query.  To run the query, press ctrl/command and enter.  Alternatively, you can press the run button at the top right hand corner of the screen.  ![Alt text](image-7.png)
 
+When you run the first query, you will see the results appear at the bottom of the screen.  Press ![Alt text](image-8.png) at the bottom left hand corner of the screen to colapse the editor.
+
+View the Query details on the right - this is a great place to view some quick insights into the shape of your data 
+
+![Alt text](image-9.png)
