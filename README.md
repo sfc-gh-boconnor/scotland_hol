@@ -32,3 +32,12 @@ Opening up the Raw Schema of the NSS_HANDS_ON_LAB_DATASETS database will reveal 
 Highlight IMD_2020 to reveal information about the table - which also includes a dictionary which explains what some of the fields mean.
 
 ![Alt text](image-5.png)
+
+Now lets go to the worksheet.  There are a few sophisticated queries in here.
+
+Position your mouse cursor anywhere inside the first sample query.  TIP - you do not have to highlight the query, the run button will only run up until the end of the query (where you see the semi colon)
+
+![Alt text](image-6.png)
+
+Above is a screenshot of the first query.  To run the query, press ctrl/command and enter.  Alternatively, you can press the run button at the top right hand corner of the screen.  ![Alt text](image-7.png)
+
