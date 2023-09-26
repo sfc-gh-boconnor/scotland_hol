@@ -15,7 +15,13 @@ The following Hands on Lab will take you though collecting data from a data shar
 
 ![Alt text](image-1.png)
 
-* Click on the Listing to view more details about the dataset.  You will see some information about the data  via the data dictionary.  I have featured 4 of the datasets but you do have the option to view all 11 objects.
+* Click on the Listing to view more details about the dataset.  You will see some information about the data  via the data dictionary.  I have featured 4 of the datasets but you do have the option to view all 11 objects.   Take some time to explore the datasets available in the listing.
 
-You will also see useage examples with sample sql queries
+If you have access to other listings from other providers - or even your own datasets, you have the ability to combine them together easily.
+
+You will also see useage examples with sample sql queries.  When you press open, these sql examples will be available inside a Snowflake worksheet.
+
+* Press Open to open the dataset into a new worksheet
+
+![Alt text](image-3.png)
 
