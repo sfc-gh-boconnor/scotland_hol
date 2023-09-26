@@ -109,3 +109,8 @@ All the weather measures are averages.
 
 The next session we will be utilising Snowpark to create a streamlit application inside a database which you will create.
 
+* Download the following: create_database_and_views.sql 
+
+* Go back to the home page and select the following option:
+![Alt text](image-15.png)
+
