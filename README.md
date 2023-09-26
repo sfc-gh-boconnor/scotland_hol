@@ -109,20 +109,19 @@ All the weather measures are averages.
 
 The next session we will be utilising Snowpark to create a streamlit application inside a database which you will create.
 
-* Download the following: [Click Here](create_database_and_views.sql) 
+* Download the following: [Click Here](create_schema_and_views.sql) 
 
 * Go back to the home page and select the following option:
 ![Alt text](image-15.png)
 
 * Find the downloaded file and run all the queries - this will create a new database with a schema and will create views of the datasets we were using previously into the new database.
 
-* Replace <<FIRSTNAME_LASTNAME>> with your firstname and last name IE it should say NSS_DATA_ANALYSIS_BECKY_OCONNOR
+* Replace <<YOUR_DATABASE_NUMBER>> with your allocated database.
 
-* Repeat the replacement in the second query
 
 * Ctrl + shift + enter or ![Alt text](image-16.png)  will run all queries in the page
 
-* Refresh the Databases explorer to see the new database
+* Refresh the Databases explorer to the new content inside your database
 
 ![Alt text](image-17.png)
 
@@ -404,5 +403,9 @@ with col3:
 
 Also, now you have a database, consider using the sample queries to create some new views or tables based on those examples.
 
-Its as simple as this >>> CREATE VIEW MYVIEW AS SELECT * FROM MYQUERY OR CREATE TABLE MYTABLE AS SELECT * FROM MYQUERY
+It's as simple as this... 
+
+
+CREATE VIEW MYVIEW AS SELECT * FROM MYQUERY OR CREATE TABLE MYTABLE AS SELECT * FROM MYQUERY
+
 
