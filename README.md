@@ -444,4 +444,5 @@ Connecting your new database to tableau is easy.
 ![Alt text](image-22.png)
 
 
+NB - a use Snowflake to do any geocoding /transforms before you load into tableau - keep this at the source.
 
