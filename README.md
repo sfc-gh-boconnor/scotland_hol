@@ -400,6 +400,8 @@ with col3:
 
 #### Have a play with the application - and if you like, feel free to make changes
 
+![Alt text](image-20.png)
+
 
 Also, now you have a database, consider using the sample queries to create some new views or tables based on those examples.
 
