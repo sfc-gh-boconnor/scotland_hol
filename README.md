@@ -413,3 +413,35 @@ It's as simple as this...
 CREATE VIEW MYVIEW AS SELECT * FROM MYQUERY OR CREATE TABLE MYTABLE AS SELECT * FROM MYQUERY
 
 
+#### Tableau Integration
+
+Connecting your new database to tableau is easy.  
+
+
+* Launch Tableau Desktop
+
+* In the Home page, within connect to a server, select Snowflake
+
+* Put in your credentials and press Sign in
+
+![Alt text](image-21.png)
+
+
+* In select warehouse, choose the compute you wish to use
+
+* In Database select the NSS_HANDS_ON_LAB_DATASETS
+
+* IMD_2020 into the desktop
+
+* In the Canvas double click on the Geography field to draw a map
+
+* Drag DZName into the detail
+
+* Drag Crime Count into the Colour
+
+* If you change the pallette to diverging, you should get something like this:
+
+![Alt text](image-22.png)
+
+
+
