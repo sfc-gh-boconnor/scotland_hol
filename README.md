@@ -123,6 +123,8 @@ The next session we will be utilising Snowpark to create a streamlit application
 
 * Refresh the Databases explorer to the new content inside your database
 
+* There is also a section on this script around Time travel. Once you have created your database/tables there is protection should accidents happy.  In addition you will experience zero copy cloning where databases can be cloned for development work
+
 ![Alt text](image-17.png)
 
 * In curated, you will see 5 new views.  These are the required views for the streamlit app.
