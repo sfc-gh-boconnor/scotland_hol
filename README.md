@@ -4,10 +4,10 @@ By Rebecca O'Connor - becky.oconnor@snowflake.com
 The following Hands on Lab will take you though collecting data from a data share, exploring the data with some sample SQL queries, then you will create a database with views from the share so you can then create a streamlit application based on the sample code.
 
 
-### Login with your given username and password
+* Login with your given username and password
 
 
-*   Click on the Data Icon - you will see a sample database called SNOWFLAKE_SAMPLE_DATA.  For this lab, we will be using a data from a data share
+*   Click on the Data Icon - you will see a sample database called SNOWFLAKE_SAMPLE_DATA.  For this lab, we will be using a data from the shared private listing.  The datashare was previewed to you in the initial demo by the provider.
 
 ![Alt text](image.png)
 
@@ -19,26 +19,30 @@ The following Hands on Lab will take you though collecting data from a data shar
 
 If you have access to other listings from other providers - or even your own datasets, you have the ability to combine them together easily.
 
-You will also see useage examples with sample sql queries.  When you press open, these sql examples will be available inside a Snowflake worksheet.
+You will also see usage examples with sample sql queries.  When you press open, these sql examples will be available inside a Snowflake worksheet.
 
-* Press Open to open the dataset into a new worksheet
+* Press **Open** to open the dataset into a new worksheet
 
 ![Alt text](image-3.png)
 
-Opening up the Raw Schema of the HANDS_ON_LAB_DATASETS database will reveal all the tables within the explorer area
+Opening up the **Raw** Schema of the HANDS_ON_LAB_DATASETS database will reveal all the tables within the explorer area
 
 ![Alt text](image-4.png)
 
-* Highlight IMD_2020 to reveal information about the table - which also includes a dictionary which explains what some of the fields mean.
+* Highlight **IMD_2020** to reveal information about the table - which also includes a dictionary which explains what some of the fields mean.
 
 ![Alt text](image-5.png)
 
-* Now lets go to the worksheet.  There are a few sophisticated queries in here.
+#### Running queries from a snowsight worksheet
+
+* We will now focus on the supplied worksheet.  There are a few sophisticated queries in here.
 
 
 ##### Running your first Query
 
-* Position your mouse cursor anywhere inside the first sample query.  TIP - you do not have to highlight the query, the run button will only run up until the end of the query (where you see the semi colon)
+* Position your mouse cursor anywhere inside the first sample query.
+
+    **TIP** - you do not have to highlight the query, the run button will only run up until the end of the query (where you see the semi colon)
 
 ![Alt text](image-6.png)
 
@@ -46,13 +50,13 @@ Opening up the Raw Schema of the HANDS_ON_LAB_DATASETS database will reveal all 
 
 * When you run the first query, you will see the results appear at the bottom of the screen.  Press ![Alt text](image-8.png) at the bottom left hand corner of the screen to colapse the editor.
 
-* View the Query details on the right - this is a great place to view some quick insights into the shape of your data 
+* View the **Query details** on the right - this is a great place to view some quick insights into the shape of your data.  It gives you the ability to see the data as you engineer it before you use it in Tableau.
 
 ![Alt text](image-9.png)
 
-* You can do filterand and sorting as well - take your time to explore this.
+* You can do filtering and and sorting as well - take your time to explore this.
 
-* The chart allows you to view the data quickly as a chart.  Below is an example of what you can create
+* The chart allows you to view the data quickly as a chart.  Below is an example of what you can create.
 
 ![Alt text](image-10.png)
 
@@ -60,9 +64,9 @@ Press ![Alt text](image-11.png) on the bottom left hand side of the screen to op
 
 ##### Notes on the query you have just ran
 
-You have just ran a query which filters all the indicies of deprivation metrics by health board.  NB: the Health boards were not connected to the deprivation dataset.  What you have done is create a spatial join to link the Datazone geography boundaries to the Health board boundaries.  The join we used is one of the many hundreds standard advanced analyitical capabilities that snowflake has right outside the box.
+You have just ran a query which filters all the indicies of deprivation metrics by health board.  NB: the Health Boards were not connected to the deprivation dataset.  What you have achieved is that you have created a spatial join to link the Datazone geography boundaries to the Health board boundaries.  The join we used is one of the many hundreds of standard analyitical capabilities that Snowflake has available right outside the box.
 
-You will note we are not viewing the complex geography fields in the table.  I have simply EXCLUDED them from the query via the EXCLUDE feature.
+You will note we are not viewing the  geography fields (which consist of json containing coordinates) in the table.  I have simply excluded them from the query via the **EXCLUDE** feature.
 
 ##### Running Query 2 - A summary of casualty types for the Lothian health board
 
@@ -75,7 +79,7 @@ You will note we are not viewing the complex geography fields in the table.  I h
 
 ##### Notes on the Query
 
-As before, we filtered the health boards and joined this result to the vehicle incident data.  The vehicle incident dataset also does not have scotish health boards - so simply using the spatial join resolves the problem.
+As before, we filtered the health boards and joined this result to the vehicle incident data.  The vehicle incident dataset also does not have the Scotish Health Boards - so simply using the spatial join resolves the problem.
 
 The vehicle incident dataset also does not have descriptions of the casualty types - so we joined the vehicle incident data to the lookup table which gave me all the descriptions we needed.
 
@@ -95,23 +99,26 @@ This query is making use of the function ST_DWITHIN which basically matches loca
 
 The Hospitals itself did not have the locations attached to them - only the postcodes - so i first needed to join to the postcode table which then revealed the POINT for each postcode.
 
-##### Next Query - Combine Weather Data and Vehicle incident data for the Lothian Health Board by data
+##### Next Query - Combine Weather Data and Vehicle incident data for the Lothian Health Board
 
-* Ctrl + Click to run the next query.   We have 'geocoded' all datasets so its aware of the health board - this allowed me to filter all data by health board.    I was then able to join the data by data.  The health board for the weather data i used a tolerence level of 3000 from the centre of the health board - this could have been bigger.
+* Ctrl + Click to run the next query in order to view a combined vehicle incident and weather data table which is filtered by health board.    
 
-All the weather measures are averages.
 
 
 * The final queries take you through simple steps to view tables, then join them together.  Run these individually as you wish.
 
 
-#### Populate your own dataset
+#### Populate your own local database
 
-The next session we will finish by utilising Snowpark to create a streamlit application inside a database which you will add data to.
+So far we have worked with a datashare.  Now, we will take some of this information and organise it into a local database.
+
+This database will be used to furnish a streamlit application.  The application will utilise Snowpark for Python Dataframes.
+
 
 * Create a New SQL Worksheet.  You will see this as a menu item from the home page ![Alt text](image-23.png)
 
-* Copy and paste the following into your new worksheet
+
+* Copy and paste the following into your new worksheet - TIP - you will need to highlight all the commands which you have pasted below to run just these commands at the same time.
 
 
 ```sql
@@ -133,7 +140,7 @@ CREATE OR REPLACE VIEW MET_OFFICE_WEATHER_IN_2021 AS SELECT * FROM NSS_HANDS_ON_
 
 This will create a new database with a schema.  Inside, various views will be populated based on data shared by the provider.  These are the only views needed to create the streamlit application in this workshop.
 
-However we will now have ago at creating other objects within the database
+However we will also do more experimentation will now have ago at creating other objects within the database
 
 ##### Creating a table based on selecting information from multiple tables
 
@@ -270,11 +277,14 @@ CREATE OR REPLACE FUNCTION Points_of_a_postcode(postcode varchar)
 
 ####  Simple Time Travel Time Travel
 
-Snowflake allows you to go back to a point in time in order to go back to a point of time before changes occured.  There is a time travel hands on lab which takes you through the details.
+Snowflake allows you to go back to a point in time in order to go back in time before changes occured.  There is a seperate time travel hands on lab which takes you through the details.
 
 https://quickstarts.snowflake.com/guide/getting_started_with_time_travel/index.html?index=..%2F..index#0
 
-There are also nice quick features that take advantage of time travel - such as restoring tables/databases which have accidently been dropped
+
+In this session, we will explore the use of undrop which is useful if you accidently drop an object.
+
+
 
 * Select all data from one table
 ```sql
@@ -285,10 +295,8 @@ SELECT * FROM CASUALTIES_BY_HEALTH_BOARD;
 ```sql
 
 DROP TABLE CASUALTIES_BY_HEALTH_BOARD;
-
-
 ```
-* Select the Table again - you should see an error that the table is not found
+* Select the table again - you should see an error that the table is not found
 
 ```sql
 SELECT * FROM CASUALTIES_BY_HEALTH_BOARD;
@@ -326,9 +334,9 @@ UNDROP DATABASE NSS_DATA_ANALYSIS_<<DATABASE_NUMBER>>;
 ```
 
 #### Database Cloning
-You may wish do use a zero copy clone of a database for development purposes.
+You may wish do use a zero copy clone of a database for developmental purposes.
 
-*Try the following to clone your database - this will only copy the meta data, but any changes you make on the clone will not impact the original database
+* Try the following to clone your database - this will only copy the meta data, but any changes you make on the clone will not impact the original database
 
 ```sql
 CREATE DATABASE NSS_DATA_ANALYSIS_<<DATABASE_NUMBER>>_CLONE CLONE NSS_DATA_NALYSIS_<<DATABASE_NUMBER>>;
@@ -336,11 +344,11 @@ CREATE DATABASE NSS_DATA_ANALYSIS_<<DATABASE_NUMBER>>_CLONE CLONE NSS_DATA_NALYS
 
 
 
-#### Streamlit in Snowflake
+#### Streamlit in Snowflake - Now in Public Preview
 
 You have created various views, tables and functions and have also cloned the database.  Now it's time to create an application based on the data created
 
-* Go back to the home page and click on the button Streamlit
+* Go back to the home page and click on the button **Streamlit**
 
 * Press ![Alt text](image-18.png) to create a new Streamlit Application
 
@@ -350,7 +358,7 @@ You have created various views, tables and functions and have also cloned the da
 
 Then press **Create**
 
-Here you can create an application using Snowpark dataframes and the Streamlit application framework.  You will see an example application.
+Here you can create an application using Snowpark for Python dataframes and the Streamlit application framework.  You will see an example application.
 
 Lets create our first application 
 
@@ -380,13 +388,13 @@ If you are familar with Python Dataframes, this will be familar to you.
 So in just a few lines of code you can display data held in snowflake via a data share into an application.
 
 
-Now we will add a more sophisticated app.
+Now we will add a more sophisticated application.
 
 
 * Highlight the code created and delete it
 * Copy the following code into the canvas 
 
-* In packages, add the package pydeck 
+* In packages, add the package **pydeck** 
 * Run the app
 
 ```python
@@ -613,15 +621,24 @@ with col3:
 
 #### Have a play with the application - and if you like, feel free to make changes
 
+Go to the Streamlit documentation to view how other streamlit widgets work.
+
+https://streamlit.io/components
+
+Below is what the application should look like.
+
 ![Alt text](image-20.png)
 
 
 Also, now you have a database, consider using the sample queries to create some new views or tables based on those examples.
 
-It's as simple as this... 
+It's as simple as the examples below... 
 
 
-CREATE VIEW MYVIEW AS SELECT * FROM MYQUERY OR CREATE TABLE MYTABLE AS SELECT * FROM MYQUERY
+```sql
+CREATE VIEW MYVIEW AS SELECT * FROM MYQUERY; 
+CREATE TABLE MYTABLE AS SELECT * FROM MYQUERY
+```
 
 
 
@@ -639,11 +656,11 @@ Connecting your new database to tableau is easy.
 ![Alt text](image-21.png)
 
 
-* In select warehouse, choose the compute you wish to use
+* In select warehouse, choose the compute available to you.
 
 * In Database select the NSS_HANDS_ON_LAB_DATASETS
 
-* IMD_2020 into the desktop
+* Drag IMD_2020 into the data model.
 
 * In the Canvas double click on the Geography field to draw a map
 
@@ -656,7 +673,7 @@ Connecting your new database to tableau is easy.
 ![Alt text](image-22.png)
 
 
-NB - a use Snowflake to do any geocoding /transforms before you load into tableau - keep this at the source.
+NB - Use Snowflake to do any geocoding /transforms before you load into tableau - keep this at the source.  You can utilise Functions if you need this to be dynamic.
 
 
 #### Data Source 2 Exercise
