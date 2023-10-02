@@ -237,6 +237,8 @@ ON A."Postcode" = B."Postcode" ) ) B
 ON
 
 ST_DWITHIN(A.POINT,B."Point",distance) $$;
+
+SELECT * FROM TABLE (ACCIDENTS_NEAR_HOSPITALS(500, 'Dundee Dental Hospital'));
 ```
 
 
