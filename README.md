@@ -245,20 +245,100 @@ ST_DWITHIN(A.POINT,B."Point",distance) $$;
 SELECT * FROM TABLE (ACCIDENTS_NEAR_HOSPITALS(500, 'Dundee Dental Hospital'));
 ```
 
+You can also create a table function:
+
+* Copy and paste the following code to create a Point Geocode function based on the Postcodes table
 
 
-* Ctrl + shift + enter or ![Alt text](image-16.png)  will run all queries in the page
+```sql
+CREATE OR REPLACE FUNCTION Points_of_a_postcode(postcode varchar)
+  RETURNS geography
+  AS
+  $$
+    SELECT ST_POINT(LONGITUDE,LATITUDE) FROM POSTCODES WHERE "Postcode" = postcode LIMIT 1
+  $$
+  ;
+-------Test out the function here
+  SELECT  Points_of_a_postcode('DY13 9GN') POINT,
+          ST_Y(POINTS_OF_A_POSTCODE('DY13 9GN')) LATITUDE,
+          ST_X(Points_of_a_postcode('DY13 9GN')) LONGITUDE
+```
+
+
 
 * Refresh the Databases explorer to the new content inside your database
 
-* c
+####  Simple Time Travel Time Travel
+
+Snowflake allows you to go back to a point in time in order to go back to a point of time before changes occured.  There is a time travel hands on lab which takes you through the details.
+
+https://quickstarts.snowflake.com/guide/getting_started_with_time_travel/index.html?index=..%2F..index#0
+
+There are also nice quick features that take advantage of time travel - such as restoring tables/databases which have accidently been dropped
+
+* Select all data from one table
+```sql
+
+SELECT * FROM CASUALTIES_BY_HEALTH_BOARD;
+```
+* Drop the table
+```sql
+
+DROP TABLE CASUALTIES_BY_HEALTH_BOARD;
 
 
-* There is also a section on this script around Time travel. Once you have created your database/tables there is protection should accidents happy.  In addition you will experience zero copy cloning where databases can be cloned for development work
+```
+* Select the Table again - you should see an error that the table is not found
 
-![Alt text](image-17.png)
+```sql
+SELECT * FROM CASUALTIES_BY_HEALTH_BOARD;
+```
 
-* In curated, you will see 5 new views.  These are the required views for the streamlit app.
+* You have made an error - so undrop the table
+
+```sql
+UNDROP TABLE CASUALTIES_BY_HEALTH_BOARD;
+```
+
+* Now select the table again - it should now be restored
+
+```sql
+SELECT * FROM CASUALTIES_BY_HEALTH_BOARD;
+```
+
+Now we can see how easy it is to restore a table, what about an entire database?
+
+* Drop the database you have access to
+
+```sql
+DROP DATABASE NSS_DATA_ANALYSIS_<<DATABASE_NUMBER>>;
+```
+* Try and use the database you have just dropped - you should get an error.
+
+```sql
+USE DATABASE NSS_DATA_ANALYSIS_<<DATABASE_NUMBER>>;
+```
+
+* Undrop the database - It will now be restored and ready for querying again.
+
+```sql
+UNDROP DATABASE NSS_DATA_ANALYSIS_<<DATABASE_NUMBER>>;
+```
+
+#### Database Cloning
+You may wish do use a zero copy clone of a database for development purposes.
+
+*Try the following to clone your database - this will only copy the meta data, but any changes you make on the clone will not impact the original database
+
+```sql
+CREATE DATABASE NSS_DATA_ANALYSIS_<<DATABASE_NUMBER>>_CLONE CLONE NSS_DATA_NALYSIS_<<DATABASE_NUMBER>>;
+```
+
+
+
+#### Streamlit in Snowflake
+
+You have created various views, tables and functions and have also cloned the database.  Now it's time to create an application based on the data created
 
 * Go back to the home page and click on the button Streamlit
 
@@ -588,7 +668,7 @@ NB - a use Snowflake to do any geocoding /transforms before you load into tablea
 
 #### Data Source 2 Exercise
 
-Here we are going to leverage the Function we created earlier and use this dynamically inside of Tableau.
+Here we are going to leverage the table function we created earlier and use this dynamically inside of Tableau.
 
 * Instead of selecting a table, Create a Custom SQL query.  You should be able to do something like this:
 
@@ -599,4 +679,10 @@ You will need to create new tableau parameters as per the screenshot below:
 ![Alt text](image-25.png)
 
 This will allow you to use the function dynamically as you query the data inside of tableau.
+
+TIP - you can also utlise the scalar functions as tableau calculations.
+
+
+If you have time, have a play with creating tableau views by utilising the tables/views created in snowflkake.
+
 
