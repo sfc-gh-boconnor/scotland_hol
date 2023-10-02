@@ -167,6 +167,11 @@ INNER JOIN (SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.UK_VEHICLE_LOOKUPS WHERE
 
 ON A.CASUALTY_TYPE = B.CODE GROUP BY ALL;
 
+SELECT * FROM CASUALTIES_BY_HEALTH_BOARD
+'''
+* Create an Indicies of Deprivation table which includes all the health board names
+
+'''
 CREATE OR REPLACE TABLE INDICIES_OF_DEPRIVATION AS 
 
 SELECT A.* EXCLUDE GEOGRAPHY,B.* EXCLUDE GEOGRAPHY FROM (
@@ -181,9 +186,58 @@ INNER JOIN
 
 NSS_HANDS_ON_LAB_DATASETS.RAW.IMD_2020 B ON ST_DWITHIN(B.GEOGRAPHY,A.GEOGRAPHY,20);
 
-SELECT * FROM CASUALTIES_BY_HEALTH_BOARD
+select * from INDICIES_OF_DEPRIVATION
 ```
 
+#### Creating a Function
+
+Here, we will create a function that simply allows a selection of vehicle incidents near a chosen hospital and chosen distance (in Metres).  You can use this in other applications - such as Tableau!
+
+
+```sql
+
+CREATE OR REPLACE FUNCTION ACCIDENTS_NEAR_HOSPITALS(distance NUMBER, hospital_name VARCHAR)
+
+RETURNS TABLE (
+
+ACCIDENT_INDEX varchar,
+ACCIDNT_YEAR number,
+DATE date,
+TIME time,
+LATITUDE float,
+LONGITUDE float,
+HOSPITAL_NAME varchar )
+
+as $$
+
+SELECT ACCIDENT_INDEX,ACCIDENT_YEAR,DATE,TIME,A.LATITUDE,A.LONGITUDE,"HospitalName"  FROM (
+
+SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.UK_VEHICLE_ACCIDENTS) A
+
+
+INNER JOIN
+
+
+
+(SELECT * EXCLUDE LATITUDE,LONGITUDE FROM (
+
+
+
+SELECT A."Postcode",LATITUDE,LONGITUDE,"Point","HospitalName" FROM 
+NSS_HANDS_ON_LAB_DATASETS.RAW.POSTCODES A RIGHT JOIN
+
+(SELECT "HospitalCode","HospitalName","Postcode" FROM 
+
+
+NSS_HANDS_ON_LAB_DATASETS.RAW.HOSPITALS WHERE "HospitalName" like hospital_name) B
+
+ON A."Postcode" = B."Postcode" ) ) B 
+
+
+ON
+
+ST_DWITHIN(A.POINT,B."Point",distance) $$;
+```
 
 
 
