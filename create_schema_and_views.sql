@@ -67,6 +67,65 @@ SELECT * FROM INDICIES_OF_DEPRIVATION;
 
 
 
+-------create a function
+
+------creating a function 
+
+
+CREATE OR REPLACE FUNCTION ACCIDENTS_NEAR_HOSPITALS(distance NUMBER, hospital_name VARCHAR)
+
+RETURNS TABLE (
+
+ACCIDENT_INDEX varchar,
+ACCIDNT_YEAR number,
+DATE date,
+TIME time,
+LATITUDE float,
+LONGITUDE float,
+HOSPITAL_NAME varchar )
+
+as $$
+
+SELECT ACCIDENT_INDEX,ACCIDENT_YEAR,DATE,TIME,A.LATITUDE,A.LONGITUDE,"HospitalName"  FROM (
+
+SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.UK_VEHICLE_ACCIDENTS) A
+
+
+INNER JOIN
+
+
+
+(SELECT * EXCLUDE LATITUDE,LONGITUDE FROM (
+
+
+
+SELECT A."Postcode",LATITUDE,LONGITUDE,"Point","HospitalName" FROM 
+NSS_HANDS_ON_LAB_DATASETS.RAW.POSTCODES A RIGHT JOIN
+
+(SELECT "HospitalCode","HospitalName","Postcode" FROM 
+
+
+NSS_HANDS_ON_LAB_DATASETS.RAW.HOSPITALS WHERE "HospitalName" like hospital_name) B
+
+ON A."Postcode" = B."Postcode" ) ) B 
+
+
+ON
+
+ST_DWITHIN(A.POINT,B."Point",distance) $$;
+
+
+
+SELECT * FROM TABLE (ACCIDENTS_NEAR_HOSPITALS(500, 'Dundee Dental Hospital'));
+
+
+
+
+
+
+
+
+
 -----SIMPLE TIME TRAVEL
 
 ----TABLE DROPPING AND RESTORING

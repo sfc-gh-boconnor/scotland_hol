@@ -105,17 +105,30 @@ All the weather measures are averages.
 * The final queries take you through simple steps to view tables, then join them together.  Run these individually as you wish.
 
 
-#### Prepare for Streamlit
+#### Populate your own dataset
 
-The next session we will be utilising Snowpark to create a streamlit application inside a database which you will create.
+The next session we will finish by utilising Snowpark to create a streamlit application inside a database which you will add data to.
 
-* Download the following: [Click Here](create_schema_and_views.sql) 
+* Create a New SQL Worksheet.  You will see this as a menu item from the home page ![Alt text](image-23.png)
 
-* Go back to the home page and select the following option:
-![Alt text](image-15.png)
+* Copy and paste the following into your new worksheet
 
-* Find the downloaded file and run all the queries - this will create a new database with a schema and will create views of the datasets we were using previously into the new database.
+```markdown
+USE DATABASE NSS_DATA_ANALYSIS_<<YOUR_DATABASE_NUMBER>>;
 
+CREATE OR REPLACE SCHEMA CURATED;
+
+CREATE OR REPLACE VIEW HEALTH_BOARDS AS SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.HEALTH_BOARDS;
+
+CREATE OR REPLACE VIEW IMD_2020 AS SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.IMD_2020;
+
+CREATE OR REPLACE VIEW UK_VEHICLE_ACCIDENTS AS SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.UK_VEHICLE_ACCIDENTS;
+
+CREATE OR REPLACE VIEW POSTCODES AS SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.POSTCODES;
+
+CREATE OR REPLACE VIEW MET_OFFICE_WEATHER_IN_2021 AS SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.MET_OFFICE_WEATHER_IN_2021;
+
+```
 * Replace <<YOUR_DATABASE_NUMBER>> with your allocated database.
 
 
@@ -411,6 +424,14 @@ It's as simple as this...
 
 
 CREATE VIEW MYVIEW AS SELECT * FROM MYQUERY OR CREATE TABLE MYTABLE AS SELECT * FROM MYQUERY
+
+
+#### Option - Time Travel
+
+The quickstart below takes you through how time travel works.  You will need to sign up for a new trial account to complete this lab
+
+https://quickstarts.snowflake.com/guide/getting_started_with_time_travel/index.html?index=..%2F..index#1
+
 
 
 #### Tableau Integration
