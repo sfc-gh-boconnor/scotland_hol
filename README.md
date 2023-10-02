@@ -585,3 +585,18 @@ Connecting your new database to tableau is easy.
 
 NB - a use Snowflake to do any geocoding /transforms before you load into tableau - keep this at the source.
 
+
+#### Data Source 2 Exercise
+
+Here we are going to leverage the Function we created earlier and use this dynamically inside of Tableau.
+
+* Instead of selecting a table, Create a Custom SQL query.  You should be able to do something like this:
+
+![Alt text](image-24.png)
+
+You will need to create new tableau parameters as per the screenshot below:
+
+![Alt text](image-25.png)
+
+This will allow you to use the function dynamically as you query the data inside of tableau.
+
