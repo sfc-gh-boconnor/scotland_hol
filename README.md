@@ -191,17 +191,6 @@ NSS_HANDS_ON_LAB_DATASETS.RAW.IMD_2020 B ON ST_DWITHIN(B.GEOGRAPHY,A.GEOGRAPHY,2
 select * from INDICIES_OF_DEPRIVATION
 ```
 
-#### Creating a table from data inside Blob Storage
-
-• Create a New stage which will leverage data in a stage.  In this case, we are utilising data held in Blob Storage
-
-'''sql
-create or replace stage VEHICLE_DATA_AZURE
-url='azure://uknhapublicdata.blob.core.windows.net/vehincidents'
- credentials=(azure_sas_token='si=download_data&spr=https&sv=2022-11-02&sr=c&sig=hAQWMJ5J%2B4xW9fvqHizzv%2B9DlFUuEXfuLa3yq%2BsuOF8%3D')
-  directory=(enable = TRUE);
-'''
-
 
 
 #### Creating a Function
