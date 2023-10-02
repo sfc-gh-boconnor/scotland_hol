@@ -113,7 +113,8 @@ The next session we will finish by utilising Snowpark to create a streamlit appl
 
 * Copy and paste the following into your new worksheet
 
-```markdown
+
+```sql
 USE DATABASE NSS_DATA_ANALYSIS_<<YOUR_DATABASE_NUMBER>>;
 
 CREATE OR REPLACE SCHEMA CURATED;
@@ -129,6 +130,7 @@ CREATE OR REPLACE VIEW POSTCODES AS SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.
 CREATE OR REPLACE VIEW MET_OFFICE_WEATHER_IN_2021 AS SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.MET_OFFICE_WEATHER_IN_2021;
 
 ```
+
 * Replace <<YOUR_DATABASE_NUMBER>> with your allocated database.
 
 
