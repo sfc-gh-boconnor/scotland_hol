@@ -624,13 +624,6 @@ It's as simple as this...
 CREATE VIEW MYVIEW AS SELECT * FROM MYQUERY OR CREATE TABLE MYTABLE AS SELECT * FROM MYQUERY
 
 
-#### Option - Time Travel
-
-The quickstart below takes you through how time travel works.  You will need to sign up for a new trial account to complete this lab
-
-https://quickstarts.snowflake.com/guide/getting_started_with_time_travel/index.html?index=..%2F..index#1
-
-
 
 #### Tableau Integration
 
