@@ -115,7 +115,7 @@ The next session we will finish by utilising Snowpark to create a streamlit appl
 
 
 ```sql
-USE DATABASE NSS_DATA_ANALYSIS_<<YOUR_DATABASE_NUMBER>>;
+USE DATABASE NSS_DATA_ANALYSIS_<<REPLACE_WITH_YOUR_DATABASE_NUMBER>>;
 
 CREATE OR REPLACE SCHEMA CURATED;
 
@@ -131,12 +131,68 @@ CREATE OR REPLACE VIEW MET_OFFICE_WEATHER_IN_2021 AS SELECT * FROM NSS_HANDS_ON_
 
 ```
 
-* Replace <<YOUR_DATABASE_NUMBER>> with your allocated database.
+This will create a new database with a schema.  Inside, various views will be populated based on data.  Theses are the only views needed to create the streamlit application in this workshop.
+
+##### Creating a table based on selecting information from multiple tables
+
+* Copy and paste the following code into your worksheet and run it.  You are simply creating a table based on several tables used from the private listing
+
+```sql
+CREATE OR REPLACE TABLE CASUALTIES_BY_HEALTH_BOARD AS 
+
+
+SELECT HEALTH_BOARD_NAME, B.VALUE CASUALTY_TYPE, COUNT(*) CASUALTIES FROM (
+
+SELECT A.*, B.* EXCLUDE ACCIDENT_INDEX FROM (
+
+SELECT A.* EXCLUDE GEOGRAPHY,B.ACCIDENT_INDEX FROM (
+
+SELECT GEOGRAPHY,HEALTH_BOARD_CODE, HEALTH_BOARD_NAME FROM CURATED.HEALTH_BOARDS
+
+) A
+
+
+INNER JOIN 
+
+
+CURATED.UK_VEHICLE_ACCIDENTS B ON ST_WITHIN(B.POINT,A.GEOGRAPHY)
+
+) A
+
+INNER JOIN NSS_HANDS_ON_LAB_DATASETS.RAW.UK_VEHICLE_CASUALTIES B ON A.ACCIDENT_INDEX = B.ACCIDENT_INDEX
+
+) A 
+
+INNER JOIN (SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.UK_VEHICLE_LOOKUPS WHERE DATASET = 'Casualty' AND FIELD = 'casualty_type') B
+
+ON A.CASUALTY_TYPE = B.CODE GROUP BY ALL;
+
+CREATE OR REPLACE TABLE INDICIES_OF_DEPRIVATION AS 
+
+SELECT A.* EXCLUDE GEOGRAPHY,B.* EXCLUDE GEOGRAPHY FROM (
+
+SELECT GEOGRAPHY,HEALTH_BOARD_CODE, HEALTH_BOARD_NAME FROM NSS_HANDS_ON_LAB_DATASETS.RAW.HEALTH_BOARDS
+
+) A
+
+
+INNER JOIN 
+
+
+NSS_HANDS_ON_LAB_DATASETS.RAW.IMD_2020 B ON ST_DWITHIN(B.GEOGRAPHY,A.GEOGRAPHY,20);
+
+
+```
+
+
 
 
 * Ctrl + shift + enter or ![Alt text](image-16.png)  will run all queries in the page
 
 * Refresh the Databases explorer to the new content inside your database
+
+* c
+
 
 * There is also a section on this script around Time travel. Once you have created your database/tables there is protection should accidents happy.  In addition you will experience zero copy cloning where databases can be cloned for development work
 
