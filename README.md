@@ -136,6 +136,8 @@ CREATE OR REPLACE VIEW POSTCODES AS SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.
 
 CREATE OR REPLACE VIEW MET_OFFICE_WEATHER_IN_2021 AS SELECT * FROM NSS_HANDS_ON_LAB_DATASETS.RAW.MET_OFFICE_WEATHER_IN_2021;
 
+
+
 ```
 
 This will create a new database with a schema.  Inside, various views will be populated based on data shared by the provider.  These are the only views needed to create the streamlit application in this workshop.
@@ -198,8 +200,13 @@ NSS_HANDS_ON_LAB_DATASETS.RAW.IMD_2020 B ON ST_DWITHIN(B.GEOGRAPHY,A.GEOGRAPHY,2
 
 select * from INDICIES_OF_DEPRIVATION;
 ```
+##### Create a distinct list of dimensions
+This is useful for drop down lists in Tableau
 
+```sql
+CREATE OR REPLACE VIEW HOSPITAL_LIST AS SELECT DISTINCT HOSPITAL_NAME FROM NSS_HANDS_ON_LAB_DATASETS.RAW.HOSPITALS;
 
+```
 
 #### Creating a Function
 
@@ -253,7 +260,7 @@ ST_DWITHIN(A.POINT,B."Point",distance) $$;
 SELECT * FROM TABLE (ACCIDENTS_NEAR_HOSPITALS(500, 'Dundee Dental Hospital'));
 ```
 
-You can also create a table function:
+You can also create a scalar function:
 
 * Copy and paste the following code to create a Point Geocode function based on the Postcodes table
 
@@ -272,6 +279,7 @@ CREATE OR REPLACE FUNCTION Points_of_a_postcode(postcode varchar)
           ST_X(Points_of_a_postcode('DY13 9GN')) LONGITUDE
 ```
 
+You can also create functions using other languages such as scalar and python.
 
 
 * Refresh the Databases explorer to the new content inside your database
