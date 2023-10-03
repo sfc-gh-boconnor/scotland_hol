@@ -201,10 +201,14 @@ NSS_HANDS_ON_LAB_DATASETS.RAW.IMD_2020 B ON ST_DWITHIN(B.GEOGRAPHY,A.GEOGRAPHY,2
 select * from INDICIES_OF_DEPRIVATION;
 ```
 ##### Create a distinct list of dimensions
-This is useful for drop down lists in Tableau
+This is useful for drop down lists in Tableau.  I only want the list to contain Hospitals that have valid postcodes.
 
 ```sql
-CREATE OR REPLACE VIEW HOSPITAL_LIST AS SELECT DISTINCT HOSPITAL_NAME FROM NSS_HANDS_ON_LAB_DATASETS.RAW.HOSPITALS;
+CREATE OR REPLACE VIEW HOSPITAL_LIST AS SELECT DISTINCT "HospitalCode", "HospitalName" FROM NSS_HANDS_ON_LAB_DATASETS.RAW.HOSPITALS A 
+
+INNER JOIN POSTCODES B  ON A."Postcode" = B."Postcode";
+
+SELECT * FROM HOSPITAL_LIST;
 
 ```
 
@@ -698,6 +702,8 @@ You will need to create new tableau parameters as per the screenshot below:
 ![Alt text](image-25.png)
 
 This will allow you to use the function dynamically as you query the data inside of tableau.
+
+You can also leverage the HOSPITAL_LIST View which will allow you to create a drop down list for your parameter.
 
 TIP - you can also utlise the scalar functions as tableau calculations.
 
