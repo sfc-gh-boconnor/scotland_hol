@@ -705,7 +705,13 @@ This will allow you to use the function dynamically as you query the data inside
 
 You can also leverage the HOSPITAL_LIST View which will allow you to create a drop down list for your parameter.
 
-TIP - you can also utlise the scalar functions as tableau calculations.
+* Join your custom query to the hospital list table in the data model
+
+![Alt text](image-26.png)
+
+* Amend the parameter to a drop down list and populated it with the hospital names from the HOSPITAL_LIST view
+
+![Alt text](image-27.png)
 
 
 If you have time, have a play with creating tableau views by utilising the tables/views created in snowflkake.
